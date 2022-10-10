@@ -5,11 +5,14 @@ const chainId = network.config.chainId
 
 async function main() {
     // All in ERC20
-    await getWeth()
+    //await getWeth()
     console.log(chainId)
     const { deployer } = await getNamedAccounts()
     // Interact with the aave protocol
+    console.log(deployer.address)
     const lendingPool = await getLendingPool(deployer)
+    console.log(chainId)
+
     console.log(`Lending pool address ${lendingPool.address}`)
 
     // Deposit

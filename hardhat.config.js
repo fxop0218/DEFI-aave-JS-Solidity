@@ -15,7 +15,7 @@ const mainnetRpcURL =
     process.env.ALCHEMY_MAINNET_RPC_URL ||
     "https://eth-mainnet.alchemyapi.io/v2/apikey"
 const goerliRpcURL = process.env.GOERLI_RPC_URL || "https://eth-goerli.alchemyapi.io/v2/apikey"
-const privateKey = process.env.PRIVATE_KEY || "0x"
+const privateKey = process.env.PRIVATE_KEY || "0xi"
 
 // Your API key for Etherscan, obtain one at https://etherscan.io/
 const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY || "0x"
@@ -34,9 +34,9 @@ module.exports = {
         },
         goerli: {
             url: goerliRpcURL,
-            accounts: privateKey !== undefined ? [privateKey] : [],
-            saveDeployments: true,
+            accounts: [privateKey],
             chainId: 5,
+            blockConfirmations: 6,
         },
         mainnet: {
             url: mainnetRpcURL,
@@ -62,8 +62,8 @@ module.exports = {
     },
     namedAccounts: {
         deployer: {
-            default: 0,
-            1: 0,
+            default: 0, // here this will by default take the first account as deployer
+            1: 0, // similarly on mainnet it will take the first account as deployer. Note though that depending on how hardhat network are configured, the account 0 on one network can be different than on another
         },
         player: {
             default: 1,
